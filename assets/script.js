@@ -20,6 +20,8 @@ async function findAllGuitars() {
           ${guitars.description}
           </p>
           <span class="price">$ ${guitars.price}</span>
+          <a type="button" class="btn-edit">EDIT</a>
+          <a type="button" class="btn-delete">Delete</a>
         </div>
       </div>
     `

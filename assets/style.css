@@ -70,14 +70,13 @@ header .header-container input{
   transition: 0.3s;
 }
 .container .card:hover {
-  height: 600px;
+  height: 700px;
 }
 
 .container .card .img-card {
   position: relative;
   width: 260px;
   height: 260px;
-  /* top: -180px; */
   left: 80px;
   z-index: 1;
   transition: 0.5s ease-in-out;
@@ -382,6 +381,41 @@ header .header-container input{
   background: #ccc;
 }
 
+.container .card .content a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .card .content .btn-edit{
+  width: 220px;
+  padding: 5px 15px;
+  margin: 10px;
+  background: #5bc59d;
+  cursor: pointer;
+
+}
+
+.container .card .content .btn-edit:hover{
+  letter-spacing: 2px;
+  background: #18d38b;
+  transition: 0.5s ease-in-out;
+}
+
+.container .card .content .btn-delete{
+  width: 220px;
+  padding: 5px 15px;
+  margin: 10px;
+  background: #df2c2c;
+  cursor: pointer;
+
+}
+
+.container .card .content .btn-delete:hover{
+  background: #9c1f1f;
+  color: #fff;
+  transition: 0.5s ease-in-out;
+}
 
 .close{
   position: absolute;
