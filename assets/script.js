@@ -55,9 +55,54 @@ async function findByIdGuitars() {
   `;
 }
 
+findAllGuitars();
+
 function popupToggle() {
   const popup = document.getElementById("popup");
   popup.classList.toggle("active");
 }
 
-findAllGuitars();
+function createGuitar() {
+  const name = document.querySelector("#name");
+  const model = document.querySelector("#model");
+  const description = document.querySelector("#description");
+  const price = document.querySelector("price");
+  const img = document.querySelector("#img");
+
+  const guitar = {
+    name,
+    model,
+    description,
+    price,
+    img,
+  };
+
+  const response = await fetch(`${baseURL}/create`, {
+    method: 'post',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    mode: 'cors',
+    body: JSON.stringify(guitar),
+  });
+
+  const newGuitar = await response.json();
+
+  const html= `
+  <div class="card-item">
+      <div class="img-card-item">
+        <img src="${newGuitar.img}"/>
+      </div>
+      <div class="content-item">
+        <h2>${newGuitar.name}</h2>
+        <p class="model">${newGuitar.model}</p>
+        <p class="description">
+        ${newGuitar.description}
+        </p>
+        <span class="price">$ ${newGuitar.price}</span>
+      </div>
+    </div>
+  `;
+
+  document.querySelector('#container').insertAdjacentHTML('beforeend', html)
+}

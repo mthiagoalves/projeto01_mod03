@@ -13,12 +13,12 @@ body {
   background: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
 }
 
 header {
-  padding: 10px;
+  padding: 8px;
   border-bottom: 0.5px solid #ccc;
   width: 100%;
   display: flex;
@@ -29,7 +29,17 @@ header .header-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+}
+
+header h1 a img{
+  width: 180px;
+  padding: 5px 5px 0 5px;
+}
+
+header .header-container input{
+  border-radius: 5px;
+  text-align: center;
+  outline: none;
 }
 
 .select-guitar img{
@@ -167,7 +177,7 @@ header .header-container{
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 40px;
+  padding: 10px;
 }
 
 .selected-guitar .card-item {
@@ -184,22 +194,23 @@ header .header-container{
 
 .selected-guitar .card-item .img-card-item {
   position: relative;
-  width: 260px;
-  height: 260px;
+  width: 180px;
+  height: 350px;
   z-index: 1;
   transition: 0.5s ease-in-out;
 }
 
 .selected-guitar .card-item .img-card-item img {
-  max-width: 125%;
+  width: 65%;
   right: 10px;
 }
 
 .selected-guitar .card-item .content-item {
   position: relative;
-  padding: 10px 45px ;
   color: #111;
   transition: 0.3s ease-in-out;
+  margin-left: 2rem;
+  width: 450px;
 }
 
 .selected-guitar .card-item .content-item h2 {
@@ -230,12 +241,9 @@ header .header-container{
 
   .selected-guitar .card-item {
     position: relative;
-    width: 50%;
     min-width: 400px;
     height: 50%;
     border-radius: 5px;
-    /* margin: 30px 10px; */
-    /* padding: 20px 15px; */
     display: flex;
     flex-direction: column;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
@@ -244,14 +252,14 @@ header .header-container{
 
   .selected-guitar .card-item .img-card-item img {
     position: relative;
-    width: 45%;
+    width: 75%;
     
   }
 
   .selected-guitar .card-item .img-card-item {
     transform: rotate(90deg);
     transition: 0.5s ease-in-out;
-    left: 100px;
+    left: 180px;
   } 
 
   .selected-guitar .card-item .content-item {
@@ -259,6 +267,7 @@ header .header-container{
     color: #111;
     transition: 0.3s ease-in-out;
     top: -5rem;
+
   }
 
   .selected-guitar .card-item .content-item h2 {
@@ -280,25 +289,27 @@ header .header-container{
   }
 }
 
-.btn{
+.btn-modal-create .btn{
   position: relative;
   padding: 15px 15px;
-  background: #20b37b;
-  color: #fff;
+  background: #ffffff;
+  color: #000000;
   font-size: 18px;
-  display: inline-block;
+  display: flex;
+  border-bottom: 0.5px solid #ccc;
   text-decoration: none;
   cursor: pointer;
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: 0.5s;
-  justify-content: flex-end;
-  align-items: flex-start;
+  justify-content: center;
 }
 
-.btn:hover{
+.btn-modal-create .btn:hover{
   letter-spacing: 2px;
+  background: #5bc59d;
+  transition: 1s ease-in-out;
 }
 
 #popup{
@@ -307,7 +318,7 @@ header .header-container{
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10000;
-  background: #22b47c;
+  background: #5bc59d;
   width: 450px;
   padding: 30px 50px 50px 50px;
   box-shadow: 0 15px 30px #00000014;
@@ -339,7 +350,6 @@ header .header-container{
   border-radius: 5px;
   margin: 10px;
   text-align: center;
-  outline: none;
   border: none;
 }
 
@@ -352,6 +362,26 @@ header .header-container{
   align-items: center;
   justify-content: center;
 }
+
+#popup .content .content-input .btn-1{
+  position: relative;
+  font-size: 18px;
+  display: flex;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: 0.5s;
+  left: 18px;
+  margin-top: 10px;
+}
+
+#popup .content .content-input .btn-1:hover{
+  letter-spacing: 2px;
+  background: #ccc;
+}
+
 
 .close{
   position: absolute;
