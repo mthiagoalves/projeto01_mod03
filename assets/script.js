@@ -62,12 +62,12 @@ function popupToggle() {
   popup.classList.toggle("active");
 }
 
-function createGuitar() {
-  const name = document.querySelector("#name");
-  const model = document.querySelector("#model");
-  const description = document.querySelector("#description");
-  const price = document.querySelector("price");
-  const img = document.querySelector("#img");
+async function createGuitar() {
+  let name = document.querySelector("#name").value;
+  let model = document.querySelector("#model").value;
+  let description = document.querySelector("#description").value;
+  let price = document.querySelector("#price").value;
+  let img = document.querySelector("#img").value;
 
   const guitar = {
     name,
@@ -78,17 +78,17 @@ function createGuitar() {
   };
 
   const response = await fetch(`${baseURL}/create`, {
-    method: 'post',
+    method: "post",
     headers: {
       "Content-Type": "application/json",
     },
-    mode: 'cors',
+    mode: "cors",
     body: JSON.stringify(guitar),
   });
 
   const newGuitar = await response.json();
 
-  const html= `
+  const html = `
   <div class="card-item">
       <div class="img-card-item">
         <img src="${newGuitar.img}"/>
@@ -104,5 +104,11 @@ function createGuitar() {
     </div>
   `;
 
-  document.querySelector('#container').insertAdjacentHTML('beforeend', html)
+  document.querySelector(".container").insertAdjacentHTML("beforeend", html);
+
+  name = "";
+  model = "";
+  description = "";
+  price = "";
+  img = "";
 }

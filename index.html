@@ -33,7 +33,7 @@
         <h2>Register a new guitar!</h2>
 
         <div class="content-input">
-          <form action="">
+          <form>
             <input type="text" name="name" id="name" placeholder="name" />
             <input type="text" name="model" id="model" placeholder="model" />
             <input
@@ -42,9 +42,9 @@
               id="description"
               placeholder="description"
             />
-            <input type="text" name="price" id="price" placeholder="price" />
+            <input type="number" name="price" id="price" placeholder="price" />
             <input type="text" name="img" id="img" placeholder="image" />
-            <button type="submit" class="btn-1">Register</button>
+            <button class="btn-1" onclick="createGuitar()">Register</button>
           </form>
         </div>
       </div>
