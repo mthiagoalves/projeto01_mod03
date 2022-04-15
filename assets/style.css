@@ -280,3 +280,82 @@ header .header-container{
   }
 }
 
+.btn{
+  position: relative;
+  padding: 15px 15px;
+  background: #20b37b;
+  color: #fff;
+  font-size: 18px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: 0.5s;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.btn:hover{
+  letter-spacing: 2px;
+}
+
+#popup{
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  background: #22b47c;
+  width: 450px;
+  padding: 30px 50px 50px 50px;
+  box-shadow: 0 15px 30px #00000014;
+  transition: 0.5s;
+  visibility: hidden;
+}
+
+#popup.active{
+  visibility: visible;
+  top: 50%;
+}
+
+#popup .content{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#popup .content form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#popup .content .content-input input{
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
+  outline: none;
+  border: none;
+}
+
+#popup .content form button{
+  max-width: 150px;
+  background:#ffffff;
+  border: none;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close{
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+}
