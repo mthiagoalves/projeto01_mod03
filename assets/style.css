@@ -348,9 +348,11 @@ header .header-container input{
 #popup .content .content-input input{
   border-radius: 5px;
   margin: 10px;
+  width: 300px;
   text-align: center;
   border: none;
 }
+
 
 #popup .content form button{
   max-width: 150px;
@@ -374,6 +376,9 @@ header .header-container input{
   transition: 0.5s;
   left: 18px;
   margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #popup .content .content-input .btn-1:hover{

@@ -9,7 +9,7 @@ async function findAllGuitars() {
     document.querySelector("#container").insertAdjacentHTML(
       "beforeend",
       `
-      <div class="card">
+      <div class="card" id="guitar-list-id_${guitars.id}">
         <div class="img-card">
           <img src="${guitars.img}" />
         </div>
@@ -20,7 +20,7 @@ async function findAllGuitars() {
           ${guitars.description}
           </p>
           <span class="price">$ ${guitars.price}</span>
-          <a type="button" class="btn-edit">EDIT</a>
+          <a type="button" class="btn-edit" onclick="popupToggle(${guitars.id})">EDIT</a>
           <a type="button" class="btn-delete">Delete</a>
         </div>
       </div>
@@ -41,7 +41,7 @@ async function findByIdGuitars() {
   const guitarSelect = document.querySelector(".selected-guitar");
 
   guitarSelect.innerHTML = `
-    <div class="card-item">
+    <div class="card-item" id="guitar-list-id_${guitar.id}>
       <div class="img-card-item">
         <img src="${guitar.img}"/>
       </div>
@@ -59,19 +59,46 @@ async function findByIdGuitars() {
 
 findAllGuitars();
 
-function popupToggle() {
+async function popupToggle(id = null) {
+  if (id != null) {
+    document.querySelector("#modal-tittle").innerText = "Edit a New Guitar!";
+    document.querySelector(".btn-1").innerText = "Done!";
+
+    const response = await fetch(`${baseURL}/guitar/${id}`);
+    const guitars = await response.json();
+
+    document.querySelector("#name").value = guitars.name;
+    document.querySelector("#model").value = guitars.model;
+    document.querySelector("#description").value = guitars.description;
+    document.querySelector("#price").value = guitars.price;
+    document.querySelector("#img").value = guitars.img;
+    document.querySelector("#id").value = guitars.id;
+  } else {
+    document.querySelector("#modal-tittle").innerText =
+      "Register a new guitar!";
+    document.querySelector(".btn-1").innerText = "Register";
+
+    document.querySelector("#name").value = "";
+    document.querySelector("#model").value = "";
+    document.querySelector("#description").value = "";
+    document.querySelector("#price").value = "";
+    document.querySelector("#img").value = "";
+  }
+
   const popup = document.getElementById("popup");
   popup.classList.toggle("active");
 }
 
 async function createGuitar() {
-  let name = document.querySelector("#name").value;
-  let model = document.querySelector("#model").value;
-  let description = document.querySelector("#description").value;
-  let price = document.querySelector("#price").value;
-  let img = document.querySelector("#img").value;
+  const id = document.querySelector("#id").value;
+  const name = document.querySelector("#name").value;
+  const model = document.querySelector("#model").value;
+  const description = document.querySelector("#description").value;
+  const price = document.querySelector("#price").value;
+  const img = document.querySelector("#img").value;
 
   const guitar = {
+    id,
     name,
     model,
     description,
@@ -79,8 +106,12 @@ async function createGuitar() {
     img,
   };
 
-  const response = await fetch(`${baseURL}/create`, {
-    method: "post",
+  const modeActived = id > 0;
+
+  const endpoint = baseURL + (modeActived ? `/update/${id}` : `/create`);
+
+  const response = await fetch(endpoint, {
+    method: modeActived ? "put" : "post",
     headers: {
       "Content-Type": "application/json",
     },
@@ -91,7 +122,7 @@ async function createGuitar() {
   const newGuitar = await response.json();
 
   const html = `
-  <div class="card-item">
+  <div class="card-item" id="guitar-list-id_${guitar.id}>
       <div class="img-card-item">
         <img src="${newGuitar.img}"/>
       </div>
@@ -106,11 +137,9 @@ async function createGuitar() {
     </div>
   `;
 
-  document.querySelector(".container").insertAdjacentHTML("beforeend", html);
-
-  name = "";
-  model = "";
-  description = "";
-  price = "";
-  img = "";
+  if (modeActived) {
+    document.querySelector(`#guitar-list-id_${id}`).outerHTML = html;
+  } else {
+    document.querySelector(".container").insertAdjacentHTML("beforeend", html);
+  }
 }
