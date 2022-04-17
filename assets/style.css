@@ -178,7 +178,7 @@ header .header-container input{
   flex-wrap: wrap;
   padding: 10px;
 }
-
+     
 .selected-guitar .card-item {
   position: relative;
   max-width: 700px;

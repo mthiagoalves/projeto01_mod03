@@ -9,7 +9,7 @@ async function findAllGuitars() {
     document.querySelector("#container").insertAdjacentHTML(
       "beforeend",
       `
-      <div class="card" id="guitar-list-id_${guitars.id}">
+      <div class="card">
         <div class="img-card">
           <img src="${guitars.img}" />
         </div>
@@ -41,7 +41,7 @@ async function findByIdGuitars() {
   const guitarSelect = document.querySelector(".selected-guitar");
 
   guitarSelect.innerHTML = `
-    <div class="card-item" id="guitar-list-id_${guitar.id}>
+    <div class="card-item">
       <div class="img-card-item">
         <img src="${guitar.img}"/>
       </div>
@@ -122,7 +122,7 @@ async function createGuitar() {
   const newGuitar = await response.json();
 
   const html = `
-  <div class="card-item" id="guitar-list-id_${guitar.id}>
+  <div class="card-item">
       <div class="img-card-item">
         <img src="${newGuitar.img}"/>
       </div>
