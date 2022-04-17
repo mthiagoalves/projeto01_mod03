@@ -21,7 +21,7 @@ async function findAllGuitars() {
           </p>
           <span class="price">$ ${guitars.price}</span>
           <a type="button" class="btn-edit" onclick="popupToggle(${guitars.id})">EDIT</a>
-          <a type="button" class="btn-delete">Delete</a>
+          <a type="button" class="btn-delete" onclick="openModalDel(${guitars.id})">Delete</a>
         </div>
       </div>
     `
@@ -85,7 +85,7 @@ async function popupToggle(id = null) {
     document.querySelector("#img").value = "";
   }
 
-  const popup = document.getElementById("popup");
+  const popup = document.querySelector("#popup");
   popup.classList.toggle("active");
 }
 
@@ -142,4 +142,32 @@ async function createGuitar() {
   } else {
     document.querySelector(".container").insertAdjacentHTML("beforeend", html);
   }
+}
+
+function openModalDel(id) {
+  const popupDel = document.querySelector("#popup-delete");
+  popupDel.classList.toggle("activeDel");
+
+  const btnYes = document.querySelector(".btn-yes");
+
+  btnYes.addEventListener("click", function () {
+    delGuitar(id);
+  });
+}
+
+async function delGuitar(id) {
+  const response = await fetch(`${baseURL}/delete/${id}`, {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    mode: "cors",
+  });
+  const result = await response.json();
+  alert(result.message);
+
+  document.querySelector(".container").innerText = "";
+
+  openModalDel();
+  findAllGuitars();
 }

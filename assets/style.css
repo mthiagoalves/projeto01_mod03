@@ -386,6 +386,63 @@ header .header-container input{
   background: #ccc;
 }
 
+#popup-delete{
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  background: #ebebeb;
+  width: 450px;
+  height: 200px;
+  padding: 30px 50px 50px 50px;
+  box-shadow: 0 15px 30px #000000;
+  transition: 0.5s;
+  visibility: hidden;
+}
+
+#popup-delete.activeDel{
+  visibility: visible;
+  top: 50%;
+}
+
+#popup-delete .content{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#popup-delete .content .btn{
+  padding: 2rem;
+}
+
+#popup-delete .content .btn .btns{
+  padding: .5rem 2rem .5rem 2rem;
+  border: #000000 solid 1px;
+  cursor: pointer;
+}
+
+#popup-delete .content .btn .btn-yes{
+  background: #ccc;
+  transition: 0.5s;
+}
+
+#popup-delete .content .btn .btn-yes:hover{
+  background: #9c1f1f;
+}
+
+#popup-delete .content .btn .btn-no{
+  background: #ccc;
+  transition: 0.5s;
+}
+
+#popup-delete .content .btn .btn-no:hover{
+  background: #5bb0c5;
+}
+
 .container .card .content a{
   display: flex;
   justify-content: center;
