@@ -29,6 +29,8 @@ async function findAllGuitars() {
   });
 }
 
+findAllGuitars();
+
 async function findByIdGuitars() {
   const id = document.querySelector("#id-guitar").value;
 
@@ -56,8 +58,6 @@ async function findByIdGuitars() {
     </div>
   `;
 }
-
-findAllGuitars();
 
 async function popupToggle(id = "") {
   if (id != "") {
@@ -105,7 +105,7 @@ async function createGuitar() {
     img,
   };
 
-  const modeActived = id > 0;
+  const modeActived = id != "";
 
   const endpoint = baseURL + (modeActived ? `/update/${id}` : `/create`);
 
@@ -120,27 +120,13 @@ async function createGuitar() {
 
   const newGuitar = await response.json();
 
-  const html = `
-  <div class="card-item">
-      <div class="img-card-item">
-        <img src="${newGuitar.img}"/>
-      </div>
-      <div class="content-item">
-        <h2>${newGuitar.name}</h2>
-        <p class="model">${newGuitar.model}</p>
-        <p class="description">
-        ${newGuitar.description}
-        </p>
-        <span class="price">$ ${newGuitar.price}</span>
-      </div>
-    </div>
-  `;
+  document.location.reload(true);
 
-  if (modeActived) {
-    document.querySelector(`#guitar-list-id_${id}`).outerHTML = html;
-  } else {
-    document.querySelector(".container").insertAdjacentHTML("beforeend", html);
-  }
+  // if (modeActived) {
+  //   document.querySelector(`#guitar-list-id_${id}`).outerHTML = html;
+  // } else {
+  //   document.querySelector(".container").insertAdjacentHTML("beforeend", html);
+  // }
 }
 
 function openModalDel(id) {
@@ -165,8 +151,7 @@ async function delGuitar(id) {
   const result = await response.json();
   alert(result.message);
 
-  document.querySelector(".container").innerText = "";
+  document.location.reload(true);
 
   openModalDel();
-  findAllGuitars();
 }
