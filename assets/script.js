@@ -20,8 +20,8 @@ async function findAllGuitars() {
           ${guitars.description}
           </p>
           <span class="price">$ ${guitars.price}</span>
-          <a type="button" class="btn-edit" onclick="popupToggle(${guitars.id})">EDIT</a>
-          <a type="button" class="btn-delete" onclick="openModalDel(${guitars.id})">Delete</a>
+          <a type="button" class="btn-edit" onclick="popupToggle('${guitars._id}')">EDIT</a>
+          <a type="button" class="btn-delete" onclick="openModalDel('${guitars._id}')">Delete</a>
         </div>
       </div>
     `
@@ -59,8 +59,8 @@ async function findByIdGuitars() {
 
 findAllGuitars();
 
-async function popupToggle(id = null) {
-  if (id != null) {
+async function popupToggle(id = "") {
+  if (id != "") {
     document.querySelector("#modal-tittle").innerText = "Edit a New Guitar!";
     document.querySelector(".btn-1").innerText = "Done!";
 
@@ -72,7 +72,7 @@ async function popupToggle(id = null) {
     document.querySelector("#description").value = guitars.description;
     document.querySelector("#price").value = guitars.price;
     document.querySelector("#img").value = guitars.img;
-    document.querySelector("#id").value = guitars.id;
+    document.querySelector("#id").value = guitars._id;
   } else {
     document.querySelector("#modal-tittle").innerText =
       "Register a new guitar!";
@@ -98,7 +98,6 @@ async function createGuitar() {
   const img = document.querySelector("#img").value;
 
   const guitar = {
-    id,
     name,
     model,
     description,
