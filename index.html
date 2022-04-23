@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fender Guitar</title>
     <link rel="stylesheet" href="/assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+    <link rel="shortcut icon" type="image/png" href="/assets/img/logo.png" />
   </head>
   <body>
     <header>
@@ -17,9 +22,9 @@
         <p>Select your guitar for ID</p>
         <div class="select-guitar">
           <input type="text" id="id-guitar" placeholder="ID" />
-          <button onclick="findByIdGuitars()">
+          <a onclick="findByIdGuitars()">
             <img src="/assets/img/lupa.png" alt="lupa" />
-          </button>
+          </a>
         </div>
       </div>
     </header>
@@ -27,6 +32,9 @@
     <section class="btn-modal-create">
       <a href="#" class="btn" onclick="popupToggle()">Register Guitar</a>
     </section>
+
+    <span class="msg-alert"></span>
+    <a href="/" class="home"> <- Back to Home</a>
 
     <section id="popup">
       <div class="content">

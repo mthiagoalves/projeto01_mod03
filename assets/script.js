@@ -1,5 +1,7 @@
 const baseURL = "http://localhost:3000/guitars";
 
+const msgAlert = document.querySelector(".msg-alert");
+
 async function findAllGuitars() {
   const response = await fetch(`${baseURL}/find-guitar`);
 
@@ -34,12 +36,30 @@ findAllGuitars();
 async function findByIdGuitars() {
   const id = document.querySelector("#id-guitar").value;
 
+  if (id == "") {
+    localStorage.setItem("message", "Enter a ID");
+    localStorage.setItem("type", "alert");
+
+    msgAlert.innerHTML = localStorage.getItem("message");
+    msgAlert.classList.add(localStorage.getItem("type"));
+    closeMsgAlert();
+    return;
+  }
+
   const response = await fetch(`${baseURL}/guitar/${id}`);
 
   const guitar = await response.json();
 
-  console.log(guitar);
+  if (guitar.message != undefined) {
+    localStorage.setItem("message", guitar.message);
+    localStorage.setItem("type", "alert");
 
+    showMessageAlert();
+    return;
+  }
+
+  document.querySelector(".home").style.display = "block";
+  document.querySelector(".container").style.display = "none";
   const guitarSelect = document.querySelector(".selected-guitar");
 
   guitarSelect.innerHTML = `
@@ -54,6 +74,8 @@ async function findByIdGuitars() {
         ${guitar.description}
         </p>
         <span class="price">$ ${guitar.price}</span>
+        <a type="button" class="btn-edit" onclick="popupToggle('${guitar._id}')">EDIT</a>
+        <a type="button" class="btn-delete" onclick="openModalDel('${guitar._id}')">Delete</a>
       </div>
     </div>
   `;
@@ -120,13 +142,25 @@ async function createGuitar() {
 
   const newGuitar = await response.json();
 
-  document.location.reload(true);
+  if (newGuitar.message != undefined) {
+    localStorage.setItem("message", "Send all info the guitar");
+    localStorage.setItem("type", "alert");
 
-  // if (modeActived) {
-  //   document.querySelector(`#guitar-list-id_${id}`).outerHTML = html;
-  // } else {
-  //   document.querySelector(".container").insertAdjacentHTML("beforeend", html);
-  // }
+    showMessageAlert();
+    return;
+  }
+
+  if (modeActived) {
+    localStorage.setItem("message", "Updated Guitar");
+    localStorage.setItem("type", "sucess");
+  } else {
+    localStorage.setItem("message", "Created Guitar");
+    localStorage.setItem("type", "sucess");
+
+    msgAlert.innerHTML = localStorage.getItem("message");
+    msgAlert.classList.add(localStorage.getItem("type"));
+  }
+  document.location.reload(true);
 }
 
 function openModalDel(id) {
@@ -153,5 +187,36 @@ async function delGuitar(id) {
 
   document.location.reload(true);
 
+  localStorage.setItem("message", result.message);
+  localStorage.setItem("type", "alert");
+
   openModalDel();
 }
+
+//function com setTimeOut para fechar a mensagem de alerta com tempo
+closeMsgAlert = () => {
+  setTimeout(function () {
+    msgAlert.innerHTML = "";
+    msgAlert.classList.remove(localStorage.getItem("type"));
+    localStorage.clear();
+  }, 3000);
+};
+
+//function para mostrar as mensagens
+showMessageAlert = () => {
+  msgAlert.innerHTML = localStorage.getItem("message");
+  msgAlert.classList.add(localStorage.getItem("type"));
+  closeMsgAlert();
+};
+
+//function para ativar o input ao apertar o enter
+const keyEnter = document.getElementById("id-guitar");
+keyEnter.addEventListener("keyup", function (e) {
+  var key = e.which || e.keyCode;
+  if (key == 13) {
+    //código da tecla enter é o 13
+    findByIdGuitars();
+  }
+});
+
+showMessageAlert();
