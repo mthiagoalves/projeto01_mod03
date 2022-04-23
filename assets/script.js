@@ -187,8 +187,8 @@ async function delGuitar(id) {
 
   document.location.reload(true);
 
-  localStorage.setItem("message", result.message);
-  localStorage.setItem("type", "alert");
+  localStorage.setItem("message", result.message); //mostra a msg na tela
+  localStorage.setItem("type", "alert"); //mostra a msg na tela
 
   openModalDel();
 }
